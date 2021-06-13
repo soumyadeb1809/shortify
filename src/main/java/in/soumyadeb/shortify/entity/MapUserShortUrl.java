@@ -3,6 +3,7 @@ package in.soumyadeb.shortify.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "map_user_short_url")
+@Where(clause = "deleted = false")
 public class MapUserShortUrl {
 
     @Id

@@ -3,6 +3,7 @@ package in.soumyadeb.shortify.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -11,20 +12,24 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "user")
+@Where(clause = "deleted = false")
 public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
+    public User(Integer id) {
+        this.id = id;
+    }
 }
