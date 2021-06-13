@@ -49,6 +49,7 @@ public class ShortUrlServiceImpl implements ShortUrlService {
         return shortUrl.getId();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<ShortUrlDto> getShortUrls(Integer userId) {
         List<ShortUrlDto> shortUrlDtoList = new ArrayList<>();
@@ -66,6 +67,35 @@ public class ShortUrlServiceImpl implements ShortUrlService {
         return shortUrlDtoList;
     }
 
+    @Transactional
+    @Override
+    public Integer deleteShortUrl(Integer id) {
+        try {
+            Optional<ShortUrl> shortUrlOp = shortUrlRepo.findById(id);
+
+            if(!shortUrlOp.isPresent()) {
+                System.out.println("Not found ShortUrl Id: " + id);
+                return null;
+            }
+
+            ShortUrl shortUrl = shortUrlOp.get();
+            shortUrl.setDeleted(true);
+            shortUrlRepo.save(shortUrl);
+            System.out.println("Deleted ShortUrl Id: " + id);
+
+            List<MapUserShortUrl> mappedShortUrls = mapUserShortUrlRepo.findByShortUrlId(id);
+            mappedShortUrls.forEach(mapUserShortUrl -> mapUserShortUrl.setDeleted(true));
+            mapUserShortUrlRepo.saveAll(mappedShortUrls);
+            System.out.println("Deleted MapUserShortUrl count: " + mappedShortUrls.size());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return id;
+    }
+
+    @Transactional(readOnly = true)
     @Override
     public String getLongUrl(String shortName) {
         String longUrl = null;

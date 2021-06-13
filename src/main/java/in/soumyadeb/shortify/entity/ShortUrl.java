@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "short_url")
 @Where(clause = "deleted = false")
-public class ShortUrl {
+public class ShortUrl extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

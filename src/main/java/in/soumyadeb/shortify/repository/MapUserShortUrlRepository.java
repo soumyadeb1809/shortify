@@ -15,4 +15,9 @@ public interface MapUserShortUrlRepository extends JpaRepository<MapUserShortUrl
     List<MapUserShortUrl> findByUser(
             @Param("userId") Integer userId
     );
+
+    @Query("FROM MapUserShortUrl WHERE shortUrl.id = :shortUrlId")
+    List<MapUserShortUrl> findByShortUrlId(
+            @Param("shortUrlId") Integer shortUrlId
+    );
 }

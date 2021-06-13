@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
@@ -21,7 +21,7 @@ public class UserController {
     @PostMapping
     public CreateResourceResponse createUser(
             @RequestBody CreateUserRequest request
-            ) {
+    ) {
         CreateResourceResponse response = new CreateResourceResponse();
 
         Integer id = userService.createUser(request);

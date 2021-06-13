@@ -1,9 +1,6 @@
 package in.soumyadeb.shortify.controller;
 
-import in.soumyadeb.shortify.dto.CreateResourceResponse;
-import in.soumyadeb.shortify.dto.CreateShortUrlRequest;
-import in.soumyadeb.shortify.dto.ResourceListResponse;
-import in.soumyadeb.shortify.dto.ShortUrlDto;
+import in.soumyadeb.shortify.dto.*;
 import in.soumyadeb.shortify.model.ResponseMessage;
 import in.soumyadeb.shortify.service.ShortUrlService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/short")
+@RequestMapping("/urls")
 public class ShortUrlController {
 
     @Autowired
@@ -47,6 +44,25 @@ public class ShortUrlController {
         List<ShortUrlDto> shortUrls = shortUrlService.getShortUrls(userId);
         response.setData(shortUrls);
         response.setMessage(ResponseMessage.SUCCESS);
+
+        return response;
+    }
+
+    @DeleteMapping("/{id}")
+    public DeleteResourceResponse deleteShortUrl(
+            @PathVariable("id") Integer id
+    ) {
+        DeleteResourceResponse response = new DeleteResourceResponse();
+
+        id = shortUrlService.deleteShortUrl(id);
+        response.setId(id);
+
+        if(id != null) {
+            response.setMessage(ResponseMessage.SUCCESS);
+        }
+        else {
+            response.setMessage(ResponseMessage.NOT_FOUND);
+        }
 
         return response;
     }

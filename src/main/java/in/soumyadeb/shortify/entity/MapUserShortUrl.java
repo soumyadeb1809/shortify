@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "map_user_short_url")
 @Where(clause = "deleted = false")
-public class MapUserShortUrl {
+public class MapUserShortUrl extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

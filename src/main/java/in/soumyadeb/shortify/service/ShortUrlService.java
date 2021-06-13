@@ -25,6 +25,14 @@ public interface ShortUrlService {
     List<ShortUrlDto> getShortUrls(Integer userId);
 
     /**
+     * Service to delete an existing ShortUrl and its mappings.
+     *
+     * @param id ShortUrlId
+     * @return id of the deleted ShortUrl, null if id is not found
+     */
+    Integer deleteShortUrl(Integer id);
+
+    /**
      * Service to get a long url by its shortName.
      *
      * @param shortName shortName of the ShortUrl
