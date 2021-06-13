@@ -16,6 +16,8 @@ import javax.persistence.*;
 public class MapUserShortUrl {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
     @OneToOne(fetch = FetchType.LAZY)

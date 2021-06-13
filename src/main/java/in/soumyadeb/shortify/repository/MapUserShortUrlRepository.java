@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface MapUserShortUrlRepository extends JpaRepository<MapUserShortUrl, Integer> {
 
-    @Query("FROM MapUserShortUrl WHERE user.Id = :userId")
+    @Query("FROM MapUserShortUrl WHERE user.id = :userId")
     List<MapUserShortUrl> findByUser(
             @Param("userId") Integer userId
     );

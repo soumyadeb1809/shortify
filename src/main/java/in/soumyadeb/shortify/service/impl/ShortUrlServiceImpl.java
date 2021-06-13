@@ -11,6 +11,7 @@ import in.soumyadeb.shortify.util.DtoFactory;
 import in.soumyadeb.shortify.util.EntityBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class ShortUrlServiceImpl implements ShortUrlService {
     @Autowired
     private MapUserShortUrlRepository mapUserShortUrlRepo;
 
+    @Transactional
     @Override
     public Integer createShortUrl(CreateShortUrlRequest request, Integer userId) {
         ShortUrl shortUrl = new ShortUrl();
@@ -36,7 +38,7 @@ public class ShortUrlServiceImpl implements ShortUrlService {
             System.out.println("Created ShortUrl Id: " + shortUrlId);
 
             MapUserShortUrl mapUserShortUrl = new MapUserShortUrl();
-            EntityBuilder.build(mapUserShortUrl, shortUrlId, userId);
+            EntityBuilder.build(mapUserShortUrl, userId, shortUrlId);
             mapUserShortUrlRepo.save(mapUserShortUrl);
             System.out.println("Mapped ShortUrl Id: " + shortUrlId + " with User Id: " + userId);
         }
