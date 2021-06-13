@@ -35,15 +35,15 @@ public class EntityBuilder {
     /**
      * Builder method to build MapUserShortUrl entity.
      *
-     * @param mUserShortUrl entity to build
+     * @param mapUserShortUrl entity to build
      * @param userId User Id
      * @param shortUrlId ShortUrl Id
      */
-    public static void build(MapUserShortUrl mUserShortUrl, Integer userId, Integer shortUrlId) {
+    public static void build(MapUserShortUrl mapUserShortUrl, Integer userId, Integer shortUrlId) {
         User user = new User(userId);
         ShortUrl shortUrl = new ShortUrl(shortUrlId);
 
-        mUserShortUrl.setShortUrl(shortUrl);
-        mUserShortUrl.setUser(user);
+        mapUserShortUrl.setShortUrl(shortUrl);
+        mapUserShortUrl.setUser(user);
     }
 }

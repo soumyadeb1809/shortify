@@ -13,7 +13,7 @@ public class DtoFactory {
      * @param user entity
      * @return instance of UserDto
      */
-    public UserDto createUserDto(User user) {
+    public static UserDto createUserDto(User user) {
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setFirstName(user.getFirstName());
@@ -30,7 +30,7 @@ public class DtoFactory {
      * @param userId user Id
      * @return instance of UserDto
      */
-    public ShortUrlDto createShortUrlDto(ShortUrl shortUrl, Integer userId) {
+    public static ShortUrlDto createShortUrlDto(ShortUrl shortUrl, Integer userId) {
         ShortUrlDto shortUrlDto = new ShortUrlDto();
         shortUrlDto.setId(shortUrl.getId());
         shortUrlDto.setTitle(shortUrl.getTitle());
