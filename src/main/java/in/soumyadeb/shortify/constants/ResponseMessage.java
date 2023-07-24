@@ -1,4 +1,4 @@
-package in.soumyadeb.shortify.model;
+package in.soumyadeb.shortify.constants;
 
 public class ResponseMessage {
     public static final String SUCCESS = "success";

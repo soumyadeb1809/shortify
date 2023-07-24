@@ -4,7 +4,7 @@ import in.soumyadeb.shortify.dto.CreateResourceResponse;
 import in.soumyadeb.shortify.dto.CreateUserRequest;
 import in.soumyadeb.shortify.dto.ResourceListResponse;
 import in.soumyadeb.shortify.dto.UserDto;
-import in.soumyadeb.shortify.model.ResponseMessage;
+import in.soumyadeb.shortify.constants.ResponseMessage;
 import in.soumyadeb.shortify.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
