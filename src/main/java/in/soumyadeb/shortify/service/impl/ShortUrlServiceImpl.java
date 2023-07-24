@@ -20,11 +20,15 @@ import java.util.Optional;
 @Service
 public class ShortUrlServiceImpl implements ShortUrlService {
 
-    @Autowired
-    private ShortUrlRepository shortUrlRepo;
+    private final ShortUrlRepository shortUrlRepo;
+
+    private final MapUserShortUrlRepository mapUserShortUrlRepo;
 
     @Autowired
-    private MapUserShortUrlRepository mapUserShortUrlRepo;
+    public ShortUrlServiceImpl(ShortUrlRepository shortUrlRepo, MapUserShortUrlRepository mapUserShortUrlRepo) {
+        this.shortUrlRepo = shortUrlRepo;
+        this.mapUserShortUrlRepo = mapUserShortUrlRepo;
+    }
 
     @Transactional
     @Override
