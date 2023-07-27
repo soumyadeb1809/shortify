@@ -1,7 +1,8 @@
 package in.soumyadeb.shortify.controller;
 
 import in.soumyadeb.shortify.dto.*;
-import in.soumyadeb.shortify.model.ResponseMessage;
+import in.soumyadeb.shortify.constants.ResponseMessage;
+import in.soumyadeb.shortify.service.QrCodeService;
 import in.soumyadeb.shortify.service.ShortUrlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,9 @@ public class ShortUrlController {
 
     @Autowired
     private ShortUrlService shortUrlService;
+
+    @Autowired
+    private QrCodeService qrCodeService;
 
     @PostMapping
     public CreateResourceResponse createShortUrl(
@@ -64,6 +68,38 @@ public class ShortUrlController {
             response.setMessage(ResponseMessage.NOT_FOUND);
         }
 
+        return response;
+    }
+
+    @PostMapping("/qr")
+    public ResourceResponse<QrCodeDto> createQrCode(CreateShortUrlQrRequest request) {
+        ResourceResponse<QrCodeDto> response = new ResourceResponse<>();
+
+        QrCodeDto qrCodeDto = qrCodeService.generateQrCode(request.getShortUrlId());
+        response.setData(qrCodeDto);
+
+        if(qrCodeDto != null) {
+            response.setMessage(ResponseMessage.SUCCESS);
+        }
+        else {
+            response.setMessage(ResponseMessage.NOT_FOUND);
+        }
+        return response;
+    }
+
+    @GetMapping("/qr/{shortUrlId}")
+    public ResourceResponse<QrCodeDto> getQrCode(@PathVariable("shortUrlId") Integer shortUrlId) {
+        ResourceResponse<QrCodeDto> response = new ResourceResponse<>();
+
+        QrCodeDto qrCodeDto = qrCodeService.getQrCode(shortUrlId);
+        response.setData(qrCodeDto);
+
+        if(qrCodeDto != null) {
+            response.setMessage(ResponseMessage.SUCCESS);
+        }
+        else {
+            response.setMessage(ResponseMessage.FAILED);
+        }
         return response;
     }
 
